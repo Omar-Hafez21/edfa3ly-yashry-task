@@ -1,61 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# BE take-home coding challenge guidelines.
+Please organize, design, test, document, and deploy your code as if it were
+going into production.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Challenge Description
 
-## About Laravel
+***Write a program that can price a cart of products, accept multiple products, combine offers, and display a total detailed bill in different currencies (based on user selection).***
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Available catalog products and their price in USD:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* T-shirt $10.99
+* Pants $14.99
+* Jacket $19.99
+* Shoes $24.99
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The program can handle some special offers, which affect the pricing.
 
-## Learning Laravel
+Available offers:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* Shoes are on 10% off.
+* Buy two t-shirts and get a jacket half its price.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The program accepts a list of products, outputs the detailed bill of the subtotal, tax, and discounts if applicable, bill can be displayed in various currencies.
 
-## Laravel Sponsors
+*There is a 14% tax (before discounts) applied to all products.*
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+E.g.:
 
-### Premium Partners
+Adding the following products:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+```
+T-shirt
+T-shirt
+Shoes
+Jacket
+```
 
-## Contributing
+Outputs the following bill, the user selected the USD bill:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+Subtotal: $66.96
+Taxes: $9.37
+Discounts:
+	10% off shoes: -$2.499
+	50% off jacket: -$9.995
+Total: $63.8404
+```
 
-## Code of Conduct
+Another, e.g., If none of the offers are eligible, the user selected the EGP bill:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+T-shirt
+Pants
+```
 
-## Security Vulnerabilities
+Outputs the following bill:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+Subtotal: 409 e£
+Taxes: 57 e£
+Total: 467 e£
+```
+  
+## Requirements
+1. PHP
+1. Stick to OO fundamentals in all aspects of your code. 
+1. Stick to SOLID principles.
+	1. Code should allow future extensibility by *strictly* follow the Open-closed Principle.
+1. Use pre-defined [Design Patterns](https://en.wikipedia.org/wiki/Software_design_pattern) whenever needed in your code. 
+1. Input should be via either (whatever suits you)
+	1. The command line in the form `createCart --bill-currency=EGP T-shirt T-shirt shoes`.
+	1. Or a simple REST API.
+1. Write unit tests to cover your core code fully.
+1. No pseudo-code allowed. 
+  
+## Expected Deliverables
+1. Hosted repository for the program, link to it (e.g.
+Github, Bitbucket, etc.).
+1. Code should be well structured, suitably commented, have error handling, and be tested.
+1. README file, where you describe your solution (design and architecture), how to run the program. You can use pseudo-code here.
+ 
+### How will we review?
+[Guidelines can be found here](README.md)
 
-## License
+---
+#### Frequently asked questions 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##### Q: I have a more robust background in other languages than PHP. Can I use it to complete the task?
+###### A: Yes, although the task endorses PHP as a requirement, we still believe that the best engineers are language agnostic. PHP reflects the primary language in our stack, which you'll be using daily.
+
+##### Q: Can I use framework X to implement the task, use external libraries/dependencies, or shall I write the code in plain PHP?
+###### A: The task itself doesn't require a specific framework to complete the task, nor using a framework breaks the requirements; however, with a deeper understanding of the task, you can make this decision on your own. Also, your choice of using any external libraries is considered as a part of our code review (Refer to "How will we review?" section)
+
+##### Q: I currently work at a full-time job/Is there a deadline to deliver it?
+###### A: Although there's NO deadline, we endorse having you take a good look at the task, send us back your best estimate of delivery, which can show us your commitment level without putting any pressure on your schedules.
+
+##### Q: Shall I use any persistent layer to manage stuff like products or currencies?
+###### A: This doesn't come as a requirement; however, we value using practices like configurations/fixtures to control these stuff, rather than adding some admin panel to enter these data. 
+
+REQUIREMENTS  -php "^7.2.5"
+I used laravel to complete this task
+Installation
+ -run: composer install -run: php artisan key:generate 
+ -run: php artisan serve 
+To run tests -run: php artisan test
+
+Postman Documentation https://documenter.getpostman.com/view/5537066/TVYDdzBm
+
+I used https://www.exchangerate-api.com/ API to find the currency rates.
